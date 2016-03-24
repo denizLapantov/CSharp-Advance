@@ -1,0 +1,6 @@
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\bin\Debug\3.CountSubstringOccurrences.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\bin\Debug\3.CountSubstringOccurrences.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\bin\Debug\3.CountSubstringOccurrences.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\obj\Debug\3.CountSubstringOccurrences.csprojResolveAssemblyReference.cache
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\obj\Debug\3.CountSubstringOccurrences.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\3.CountSubstringOccurrences\obj\Debug\3.CountSubstringOccurrences.pdb

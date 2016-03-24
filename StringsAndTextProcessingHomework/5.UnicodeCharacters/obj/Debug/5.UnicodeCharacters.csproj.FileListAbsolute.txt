@@ -1,0 +1,5 @@
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\5.UnicodeCharacters\bin\Debug\5.UnicodeCharacters.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\5.UnicodeCharacters\bin\Debug\5.UnicodeCharacters.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\5.UnicodeCharacters\bin\Debug\5.UnicodeCharacters.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\5.UnicodeCharacters\obj\Debug\5.UnicodeCharacters.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\5.UnicodeCharacters\obj\Debug\5.UnicodeCharacters.pdb

@@ -1,0 +1,5 @@
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\1.ReverseString\bin\Debug\1.ReverseString.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\1.ReverseString\bin\Debug\1.ReverseString.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\1.ReverseString\bin\Debug\1.ReverseString.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\1.ReverseString\obj\Debug\1.ReverseString.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\1.ReverseString\obj\Debug\1.ReverseString.pdb

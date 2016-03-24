@@ -1,0 +1,6 @@
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\bin\Debug\4.TextFilter.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\bin\Debug\4.TextFilter.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\bin\Debug\4.TextFilter.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\obj\Debug\4.TextFilter.csprojResolveAssemblyReference.cache
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\obj\Debug\4.TextFilter.exe
+c:\users\deniz\documents\visual studio 2015\Projects\StringsAndTextProcessingHomework\4.TextFilter\obj\Debug\4.TextFilter.pdb
