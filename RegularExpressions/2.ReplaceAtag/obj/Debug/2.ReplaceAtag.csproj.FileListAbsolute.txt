@@ -1,0 +1,5 @@
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\2.ReplaceAtag\bin\Debug\2.ReplaceAtag.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\2.ReplaceAtag\bin\Debug\2.ReplaceAtag.exe
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\2.ReplaceAtag\bin\Debug\2.ReplaceAtag.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\2.ReplaceAtag\obj\Debug\2.ReplaceAtag.exe
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\2.ReplaceAtag\obj\Debug\2.ReplaceAtag.pdb

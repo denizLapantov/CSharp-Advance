@@ -1,0 +1,5 @@
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\4.SentenceExtractor\bin\Debug\4.SentenceExtractor.exe.config
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\4.SentenceExtractor\bin\Debug\4.SentenceExtractor.exe
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\4.SentenceExtractor\bin\Debug\4.SentenceExtractor.pdb
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\4.SentenceExtractor\obj\Debug\4.SentenceExtractor.exe
+c:\users\deniz\documents\visual studio 2015\Projects\RegularExpressions\4.SentenceExtractor\obj\Debug\4.SentenceExtractor.pdb
