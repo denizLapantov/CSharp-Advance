@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Minner
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+          Dictionary<string,long> dictionary = new Dictionary<string,long>();
+
+            string input = Console.ReadLine();
+
+            while (input != "stop")
+            {
+               if (!dictionary.ContainsKey(input))
+                    {
+                        dictionary.Add(input, 0);
+                    }
+                
+               
+                dictionary[input] += long.Parse(Console.ReadLine());
+              
+                input = Console.ReadLine();
+            }
+            
+            foreach (var VARIABLE in dictionary)
+            {
+                Console.WriteLine("{0} -> {1}",VARIABLE.Key,VARIABLE.Value);
+            }
+        }
+    }
+}

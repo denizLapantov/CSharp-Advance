@@ -1,0 +1,23 @@
+using System;
+using System.Runtime.InteropServices;
+
+namespace _1.ActionPrint
+{
+    public class ActionPrint
+    {
+        public  static void Main()
+        {
+            string[] input = Console.ReadLine().Split(' ');
+            Action<string> print =  str => Console.WriteLine(str);
+            foreach (var s in input)
+            {
+                print(s);
+            }
+        }
+
+        public  void Print(string str)
+        {
+            Console.WriteLine(str);
+        }
+    }
+}

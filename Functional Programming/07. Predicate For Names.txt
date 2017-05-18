@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _7.PredicateForNames
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            string[] names = Console.ReadLine().Split(' ');
+
+            List<string> arrayList = new List<string>();
+            foreach (var name in names)
+            {
+              arrayList.Add(name);               
+            }
+
+            Predicate<string> sort = x => x.Length <= n;
+            foreach (var name in arrayList)
+            {
+                if (sort(name))
+                {
+                    Console.WriteLine(name);
+                }
+            }
+
+
+
+        }
+    }
+}

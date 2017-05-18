@@ -1,0 +1,31 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace _5.CalculateSequenceWithQueue
+{
+    public class Program
+    {
+        public static void Main()
+        {
+            long n = long.Parse(Console.ReadLine());
+
+            Queue<long> myQueue = new Queue<long>();
+
+            myQueue.Enqueue(n);
+
+            for (long i = 0; i < 50; i++)
+            {
+                long num = myQueue.Peek();
+                myQueue.Enqueue(num + 1);
+                myQueue.Enqueue(num * 2 + 1);
+                myQueue.Enqueue(num + 2);
+                Console.Write(" ");
+                Console.Write(string.Join(" ", myQueue.Dequeue()));
+                
+            }
+
+           
+        }
+    }
+}

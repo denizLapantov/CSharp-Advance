@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace Srabsko
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+         Dictionary<string,Dictionary<string,int>> data = new Dictionary<string, Dictionary<string, int>>();
+            Regex pattern = new Regex(@"(\D+)\s@(\D+)\s(\d+)\s(\d+)");
+
+            string input = Console.ReadLine();
+
+            while (input !="End")
+            {
+                Match match = pattern.Match(input);
+                if (match.Success)
+                {
+                    string name = match.Groups[1].Value;
+                    string city = match.Groups[2].Value;
+                    int ticketPrice = int.Parse(match.Groups[3].Value);
+                    int ticketCount = int.Parse(match.Groups[4].Value);
+                    var totalPrice = ticketCount*ticketPrice;
+
+                    if (!data.ContainsKey(city))
+                    {
+                        data.Add(city, new Dictionary<string, int>());
+                    }
+                    if (!data[city].ContainsKey(name))
+                    {
+                        data[city].Add(name, 0);
+                    }
+                    data[city][name] += totalPrice;
+
+                }
+                input = Console.ReadLine();
+            }
+
+            foreach (var outerPair in data)
+            {
+                Console.WriteLine(outerPair.Key);
+
+                var sort = outerPair.Value.OrderByDescending(x => x.Value);
+
+                foreach (var inner in sort)
+                {
+                    Console.WriteLine("#  {0} -> {1}",inner.Key,inner.Value);
+                }
+            }
+        }
+    }
+}

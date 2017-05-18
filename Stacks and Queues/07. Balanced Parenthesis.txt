@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Strack
+{
+    class Program
+    {
+       public static void Main(string[] args)
+        {
+
+            Stack<char> stacken = new Stack<char>();
+           // Console.WriteLine("Please enter a mening or a word containing brackets or simular symbols.");
+            string input = "";
+            input = Console.ReadLine();
+
+            foreach (char A in input)
+            {
+                switch (A)
+                {
+                    case '(':
+                    case '[':
+                    case '{':
+                        stacken.Push(A);
+                        break;
+                    case ')':
+                        if (stacken.Peek() == '(')
+                        {
+                            stacken.Pop();
+                        }
+                        else
+                        {
+                            stacken.Push(A);
+                        }
+                        break;
+                    case ']':
+                        if (stacken.Peek() == '[')
+                        {
+                            stacken.Pop();
+                        }
+                        else
+                        {
+                            stacken.Push(A);
+                        }
+                        break;
+                    case '}':
+                        if (stacken.Peek() == '{')
+                        {
+                            stacken.Pop();
+                        }
+                        else
+                        {
+                            stacken.Push(A);
+                        }
+                        break;
+                }
+            }
+
+            if (stacken.Count == 0)
+            {
+                Console.WriteLine("YES");
+                
+            }
+            else
+            {
+                Console.WriteLine("NO");
+            }
+        }
+        //Console.WriteLine("Your input is Valid.");
+    }
+    }
+
+

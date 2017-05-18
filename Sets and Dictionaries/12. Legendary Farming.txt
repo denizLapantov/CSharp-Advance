@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace LegendaryFarming
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            SortedDictionary<string,int> keyMaterials = new SortedDictionary<string, int>();
+            SortedDictionary<string,int> notKeyMaterials = new SortedDictionary<string, int>();
+            keyMaterials.Add("shards",0);
+            keyMaterials.Add("fragments", 0);
+            keyMaterials.Add("motes", 0);
+
+            bool enoughResources = true;
+
+            while (enoughResources)
+            {
+                string[] input = Console.ReadLine().Split();
+
+                for (int i = 0; i < input.Length; i = i + 2)
+                {
+                    int power = int.Parse(input[i]);
+                    string material = input[i + 1].ToLower();
+
+                    if (!keyMaterials.ContainsKey(material))
+                    {
+                        if (!notKeyMaterials.ContainsKey(material))
+                        {
+                            notKeyMaterials.Add(material,0);
+                        }
+                        notKeyMaterials[material] += power;
+                    }
+                    else
+                    {
+                        keyMaterials[material] += power;
+
+                        if (keyMaterials[material] >=250)
+                        {
+                            keyMaterials[material] = keyMaterials[material] - 250;
+                            switch (material)
+                            {
+                                case "shards":
+                                    Console.WriteLine("Shadowmourne obtained!");
+                                    break;
+                                case "fragments":
+                                    Console.WriteLine("Valanyr obtained!");
+                                    break;
+                                case "motes":
+                                    Console.WriteLine("Dragonwrath obtained!");
+                                    break;
+                            }
+                            enoughResources = false;
+                            break;
+                            
+                        }
+                    }
+                }
+            }
+
+            var order = keyMaterials.OrderByDescending(x => x.Value);
+
+            foreach (var VARIABLE in order)
+            {
+                Console.WriteLine("{0}: {1}",VARIABLE.Key,VARIABLE.Value);
+            }
+            foreach (var VARIABLE in notKeyMaterials)
+            {
+                Console.WriteLine("{0}: {1}",VARIABLE.Key,VARIABLE.Value);
+            }
+
+
+
+
+        }
+    }
+}

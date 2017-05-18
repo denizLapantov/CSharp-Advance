@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+namespace CollectResources
+{
+    class Program
+    {
+      static void Main(string[] args)
+        {
+          var validResources = new HashSet<string> {"stone", "gold", "wood", "food"};
+            var resourcesName = new List<string>();
+            var resourcesValue = new List<int>();
+            int max = int.MinValue;
+
+          string[] firstLineInput = Console.ReadLine().Split();
+
+          foreach (var resourceValue in firstLineInput)
+          {
+              string[] resourceType = resourceValue.Split('_');
+              string resource = resourceType[0];
+              int quantity = 1;
+              if (resourceType.Length > 1)
+              {
+                  quantity = int.Parse(resourceType[1]);
+              }
+              resourcesValue.Add(quantity);
+                resourcesName.Add(resource);
+          }
+
+          int numberOfPath = int.Parse(Console.ReadLine());
+          for (int i = 0; i < numberOfPath; i++)
+          {
+              string[] path = Console.ReadLine().Split();
+              int start = int.Parse(path[0]);
+              int step = int.Parse(path[1]);
+            
+              bool[] isVisited = new bool[resourcesName.Count];
+                int curentSum = 0;
+                while (!isVisited[start])
+              {
+
+                  if (validResources.Contains(resourcesName[start]))
+                  {
+                      isVisited[start] = true;
+                      curentSum += resourcesValue[start];
+                  }
+                  start = (step + start)%resourcesName.Count;
+                  
+                }
+                max = Math.Max(max, curentSum);
+                curentSum = 0;
+
+            }
+
+          Console.WriteLine(max);
+
+        }
+    }
+}

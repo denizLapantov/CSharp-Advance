@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UserLogs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            SortedDictionary<string,Dictionary<string,int>> data = new SortedDictionary<string, Dictionary<string, int>>();
+
+            string input = Console.ReadLine();
+
+            while (input !="end")
+            {
+                string[] loginInfo = input.Split();
+                string[] ipInfo = loginInfo[0].Split('=');
+                string ip = ipInfo[1];
+                string[] userInfo = loginInfo[2].Split('=');
+                string user = userInfo[1];
+
+                if (!data.ContainsKey(user))
+                {
+                    data[user] = new Dictionary<string, int>();
+                }
+                if (!data[user].ContainsKey(ip))
+                {
+                    data[user].Add(ip,0);
+                }
+                data[user][ip]++;
+
+                input = Console.ReadLine();
+            }
+
+            foreach (var outerPair in data)
+            {
+                Console.WriteLine("{0}:",outerPair.Key);
+
+                Console.WriteLine("{0}.",string.Join(", ",outerPair.Value.Select(kv=>$"{kv.Key} => {kv.Value}")));
+            }
+        }
+    }
+}

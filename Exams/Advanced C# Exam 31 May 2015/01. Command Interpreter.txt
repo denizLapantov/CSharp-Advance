@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var array = Console.ReadLine().Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            var command = Console.ReadLine();
+
+            while (command != "end")
+            {
+                var commandArg = command.Split(' ');
+
+                switch (commandArg[0])
+                {
+                    case "sort":
+                        ExecuteSortArray(commandArg, array);
+                        break;
+                    case "reverse":
+                        EcecuteReverseArray(commandArg, array);
+                        break;
+                    case "rollLeft":
+                        ExecuteRollLeftArray(commandArg, array);
+                        break;
+                    case "rollRight":
+                        ExecuteRollRighttArray(commandArg, array);
+                        break;
+                }
+
+                command = Console.ReadLine();
+            }
+
+            Console.WriteLine("[{0}]", string.Join(", ",array));
+           
+        }
+
+        private static void ExecuteRollRighttArray(string[] commandArg, List<string> array)
+        {
+            var count = int.Parse(commandArg[1]) % array.Count;
+
+            if (count <0)
+            {
+                Console.WriteLine("Invalid input parameters.");
+            }
+            for (var i = 0; i < count; i++)
+            {
+
+                var lastElement = array[array.Count - 1];
+                array.RemoveAt(array.Count - 1);
+                array.Insert(0, lastElement);
+            }
+
+        }
+
+        private static void ExecuteRollLeftArray(string[] commandArg, List<string> array)
+        {
+            var count = int.Parse(commandArg[1]) % array.Count;
+
+            if (count < 0)
+            {
+                Console.WriteLine("Invalid input parameters.");
+            }
+            for (var i = 0; i < count; i++)
+            {
+                var firstElement = array[0];
+                array.RemoveAt(0);
+                array.Add(firstElement);
+            }
+
+          
+        }
+
+        private static void EcecuteReverseArray(string[] commandArg, List<string> array)
+        {
+            var startIndex = int.Parse(commandArg[2]);
+            var count = int.Parse(commandArg[4]);
+
+            if (startIndex < 0 || startIndex >= array.Count || count < 0 || startIndex + count > array.Count)
+            {
+                Console.WriteLine("Invalid input parameters.");
+                return;
+            }
+
+            array.Reverse(startIndex, count);
+        }
+
+        private static void ExecuteSortArray(string[] commandArg, List<string> array)
+        {
+            var startIndex = int.Parse(commandArg[2]);
+            var count = int.Parse(commandArg[4]);
+
+            if (startIndex < 0 || startIndex >= array.Count || count < 0 || startIndex + count > array.Count)
+            {
+                Console.WriteLine("Invalid input parameters.");
+                return;
+            }
+            array.Sort(startIndex, count, StringComparer.InvariantCulture);
+        }
+    }
+} 

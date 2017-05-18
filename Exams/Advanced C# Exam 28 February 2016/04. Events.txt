@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace Events
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Regex pattern = new Regex(@"^#([a-zA-Z]*):\s*@([a-zA-Z]+)\s*([ \d+:\d+]*)$");
+
+            SortedDictionary<string,SortedDictionary<string,List<string>>> data = new SortedDictionary<string, SortedDictionary<string, List<string>>>();
+
+            int n = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+
+                Match match = pattern.Match(input);
+
+                if (match.Success)
+                {
+                    string name = match.Groups[1].Value;
+                    string city = match.Groups[2].Value;
+                    string time = match.Groups[3].Value;
+
+                    if (!data.ContainsKey(city))
+                    {
+                        data.Add(city, new SortedDictionary<string, List<string>>());
+                    }
+                    if (!data[city].ContainsKey(name))
+                    {
+                        data[city].Add(name, new List<string>());
+                    }
+                    data[city][name].Add(time);
+                }
+            }
+
+            List<string> cities = Console.ReadLine().Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            cities.Sort();
+
+            foreach (var city in cities)
+            {
+                if (data.ContainsKey(city))
+                {
+                    Console.WriteLine(city + ":");
+                    int count = 1;
+                    foreach (var innerPair in data[city].Keys)
+                    {
+                       data[city][innerPair].Sort();
+                        data[city][innerPair].Remove("24:00");
+
+                        Console.WriteLine("{0}. {1} -> {2}",count,innerPair, string.Join(", ", data[city][innerPair]));
+                        count++;
+                    }
+                }
+
+              
+                   
+            }
+
+
+
+
+        }
+    }
+}

@@ -1,0 +1,53 @@
+//using System;
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace T09StackFibonacci
+{
+    class StackFibonacci
+    {
+        static void Main()
+        {
+            int fibonacciNum = int.Parse(Console.ReadLine());
+
+            Stack<ulong> numbers = new Stack<ulong>();
+
+            int count = 0;
+            ulong theNum;
+
+            if (fibonacciNum == 2 || fibonacciNum == 1)
+            {
+                Console.WriteLine(1);
+            }
+            else
+            {
+                numbers.Push(1);
+                numbers.Push(1);
+                count++;
+
+                while (true)
+                {
+
+                    ulong popNum = numbers.Pop();
+                    ulong secondPop = numbers.Pop();
+
+                    numbers.Push(popNum);
+
+                    numbers.Push(popNum + secondPop);
+                    count++;
+                    if (count + 1 == fibonacciNum)
+                    {
+                        theNum = popNum + secondPop;
+                        break;
+                    }
+                }
+                Console.WriteLine(theNum);
+            }
+        }
+    }
+}
+

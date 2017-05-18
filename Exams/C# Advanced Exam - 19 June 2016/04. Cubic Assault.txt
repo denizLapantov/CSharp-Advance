@@ -1,0 +1,77 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, Dictionary<string, long>> data = new Dictionary<string, Dictionary<string, long>>();
+            string pattern = @"([a-zA-Z\s]*)\s*->\s*([a-zA-Z]+)\s*->\s*(-?\d*\.{0,1}\d+)";
+            Regex regex = new Regex(pattern);
+            string input = Console.ReadLine();
+            while (input != "Count em all")
+            {
+                Match match = regex.Match(input);
+                string region = match.Groups[1].Value;
+                string type = match.Groups[2].Value;
+                long count = int.Parse(match.Groups[3].Value);
+
+                if (!data.ContainsKey(region))
+                {
+                    data.Add(region, new Dictionary<string, long>());
+                    data[region].Add("Green", 0);
+                    data[region].Add("Red", 0);
+                    data[region].Add("Black", 0);
+                }
+                if (!data[region].ContainsKey("Red"))
+                {
+                    data[region].Add("Red", 0);
+                }
+                if (!data[region].ContainsKey("Green"))
+                {
+                    data[region].Add("Green", 0);
+                }
+                if (!data[region].ContainsKey("Black"))
+                {
+                    data[region].Add("Black", 0);
+                }
+
+                data[region][type] += count;
+
+                while (data[region]["Green"] >= 1000000)
+                {
+                   data[region]["Red"]++;// 1000000;
+                   data[region]["Green"] -= 1000000;
+                }
+                while (data[region]["Red"] >= 1000000)
+                {
+                    data[region]["Black"]++;
+                    data[region]["Red"] -= 1000000;
+                }
+                input = Console.ReadLine();
+            }
+
+            var sort = data.OrderByDescending(x => x.Value["Black"]).ThenBy(y => y.Key.Length).ThenBy(z => z.Key);
+
+            foreach (var VARIABLE in sort)
+            {
+                Console.WriteLine(VARIABLE.Key);
+
+                var sorted = VARIABLE.Value.OrderByDescending(x => x.Value).ThenBy(z => z.Key);
+
+                foreach (var a in sorted)
+                {
+                    Console.WriteLine($"-> {a.Key} : {a.Value}");
+                }
+            }
+
+        }
+    }
+}

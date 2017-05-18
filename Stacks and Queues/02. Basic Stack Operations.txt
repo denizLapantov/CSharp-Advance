@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _2.BasicStackOperations
+{
+    public class BasicStackOperations
+    {
+        public static void Main()
+        {
+            Stack<int> myStack = new Stack<int>();
+            string[] numbers = Console.ReadLine().Split();
+
+            int maxElement =int.Parse(numbers[0]);
+            int delElement = int.Parse(numbers[1]);
+            int element = int.Parse(numbers[2]);
+
+            var numbs =
+                  Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+
+
+            foreach (var VARIABLE in numbs)
+            {
+                myStack.Push(VARIABLE);
+            }
+            //for (int i = 0; i < maxElement; i++)
+            //{
+
+            
+                
+
+            //}
+
+            for (int i = 0; i < delElement; i++)
+            {
+                myStack.Pop();
+            }
+
+            if (myStack.Contains(element))
+            {
+                Console.WriteLine("true");
+            }
+            else if (myStack.Count == 0 )
+            {
+                Console.WriteLine("0");
+            }
+            else
+            {
+                Console.WriteLine(myStack.Min());
+            }
+
+
+        }
+    }
+}

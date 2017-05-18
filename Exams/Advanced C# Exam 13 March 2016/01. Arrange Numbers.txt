@@ -1,0 +1,138 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArrangeNumbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            List<string> listToString = new List<string>();
+            string numbers = Console.ReadLine();
+            StringBuilder sbToString = new StringBuilder();
+            int[] array =
+                numbers.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                var curentNumber = array[i];
+                if (curentNumber >= 10)
+                {
+                    string newNumber = "";
+                    for (var j =0 ; j < curentNumber.ToString().Length; j++)
+                    {
+                        int value = (int) char.GetNumericValue(curentNumber.ToString()[j]);
+                        newNumber = ConvertToString(value);
+                        sbToString.Append(newNumber + '-');
+                    }
+                    listToString.Add(sbToString.ToString());
+                    sbToString.Clear();
+                }
+                else
+                {
+                    string otherNum = ConvertToString(curentNumber);
+                    listToString.Add(otherNum);
+                }
+            }
+
+            for (int i = 0; i < listToString.Count; i++)
+            {
+                if (listToString[i].EndsWith("-"))
+                {
+                    listToString[i] = listToString[i].Substring(0, listToString[i].Length - 1);
+                }
+            }
+
+            List<int> listToInt = new List<int>();
+            StringBuilder sbToInt = new StringBuilder();
+            listToString.Sort();
+            for (int i = 0; i < listToString.Count; i++)
+            {
+                if (listToString[i].Length < 5)
+                {
+                       int a = ConvertToInt(listToString[i]);
+                       listToInt.Add(a);
+                }
+                else
+                {
+                    string[] number = listToString[i].Split('-');
+                    int num = 0;
+                    for (int j = 0; j < number.Length; j++)
+                    {
+                        int a = ConvertToInt(number[j]);
+                        sbToInt.Append(a);
+                    }
+                    listToInt.Add(int.Parse(sbToInt.ToString()));
+                    sbToInt.Clear();
+                }
+            }
+           Console.WriteLine(string.Join(", ", listToInt));
+     }
+
+        private static string ConvertToString(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    return "zero";
+                case 1:
+                    return "one";
+                case 2:
+                    return "two";
+                case 3:
+                    return "three";
+                case 4:
+                    return "four";
+                case 5:
+                    return "five";
+                case 6:
+                    return "six";
+                case 7:
+                    return "seven";
+                case 8:
+                    return "eight";
+                case 9:
+                    return "nine";
+                case 10:
+                    return "ten";
+                default:
+                    throw new ArgumentException("");
+            }
+        }
+
+        private static int ConvertToInt(string value)
+        {
+            switch (value)
+            {
+                case "zero":
+                    return 0 ;
+                case "one":
+                    return 1;
+                case "two":
+                    return 2;
+                case "three":
+                    return 3;
+                case "four":
+                    return 4;
+                case "five":
+                    return 5;
+                case "six":
+                    return 6;
+                case "seven":
+                    return 7;
+                case "eight":
+                    return 8;
+                case "nine":
+                    return 9;
+               
+                default:
+                    throw new ArgumentException("");
+            }
+        }
+    }
+}

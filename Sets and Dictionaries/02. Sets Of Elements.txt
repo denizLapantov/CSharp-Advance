@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace SetsofElements
+{
+   public  class Program
+    {
+        public static void Main(string[] args)
+        {
+            HashSet<int> firstHashSet = new HashSet<int>();
+            HashSet<int> secondHashSet = new HashSet<int>();
+
+            string[] numbers = Console.ReadLine().Split();
+            int firsSet = int.Parse(numbers[0]);
+
+            int secondSet = int.Parse(numbers[1]);
+
+            for (int i = 0; i < firsSet; i++)
+            {
+                int firstNums = int.Parse(Console.ReadLine());
+
+                firstHashSet.Add(firstNums);
+
+            }
+
+            for (int i = 0; i < secondSet; i++)
+            {
+                int secondNum = int.Parse(Console.ReadLine());
+
+                secondHashSet.Add(secondNum);
+            }
+
+            firstHashSet.IntersectWith(secondHashSet);
+
+            foreach (var VARIABLE in firstHashSet)
+            {
+                
+                Console.Write(VARIABLE + " ");
+            }
+            
+
+        }
+    }
+}

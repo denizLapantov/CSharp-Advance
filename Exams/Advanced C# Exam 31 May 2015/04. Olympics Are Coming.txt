@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace OlimpicAreComing
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
+            string input = Regex.Replace(Console.ReadLine(),@"\s+"," ");
+
+            while (input != "report")
+            {
+                var comendsArgs = input.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+
+                var name = comendsArgs[0].Trim();
+                var cpuntry = comendsArgs[1].Trim();
+
+                if (!data.ContainsKey(cpuntry))
+                {
+                    data.Add(cpuntry, new List<string>());
+
+                }
+                data[cpuntry].Add(name);
+
+
+                input = Regex.Replace(Console.ReadLine(), @"\s+", " ");
+
+            }
+
+            var sort = data.OrderByDescending(x => x.Value.Count);
+
+            foreach (var outerPair in sort)
+            {
+                Console.WriteLine("{0} ({1} participants): {2} wins",outerPair.Key,outerPair.Value.Distinct().Count(),outerPair.Value.Count);
+               
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+
+namespace _9.ListOfPredicates
+{
+    
+    public class ListOfPredicates
+    {
+        public static void Main()
+        {
+            var n = int.Parse(Console.ReadLine());
+            var myList = new List<int>();
+            var numbers = Console.ReadLine().Split(' ').Select(int.Parse);
+
+            var predicates = numbers.Select(number => (Func<int, bool>)(x => x % number == 0)).ToArray();
+
+            for (int i = 1 ; i <=n ; i++)
+            {
+                bool isTrue = true;
+                foreach (var predicate in predicates)
+                {
+                   
+                    if (!predicate(i))
+                    {
+                        isTrue = false;
+                        break;
+                    }
+
+                }
+                if (isTrue)
+                {
+                    myList.Add(i);
+                }
+            }
+
+            Console.Write(string.Join(" ",myList));
+            Console.WriteLine();
+            
+         
+        }
+        
+    }
+}

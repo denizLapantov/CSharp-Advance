@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            long n = int.Parse(Console.ReadLine());
+            string input = Console.ReadLine();
+            long sum = 0;
+            long count = 0;
+            long total = n*n*n;
+            while (input != "Analyze")
+            {
+                string[] line = input.Split();
+
+                long x = long.Parse(line[0]);
+                long y = long.Parse(line[1]);
+                long z = long.Parse(line[2]);
+                long particle = long.Parse(line[3]);
+                if (x >=0 && y>= 0 && z>=0 && x <=n && y <=n && z <=n && particle >0)
+                {
+                    sum += particle;
+                    count++;
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(sum);
+            Console.WriteLine(total - count);
+        }
+    }
+}

@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+
+namespace UniqueUsernames
+{
+    public class UniqueUsernames
+    {
+        public static void Main()
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            SortedSet<string> sortedSet = new SortedSet<string>();
+          
+         
+            for (int i = 0; i < n; i++)
+            {
+                var readLine = Console.ReadLine();
+                if (readLine != null)
+                {
+                    string[] b = readLine.Split();
+
+                    foreach (var el in b)
+                    {
+                        sortedSet.Add(el);
+                    }
+                }
+            }
+
+            Console.Write(string.Join(" ",sortedSet));
+        }
+    }
+}

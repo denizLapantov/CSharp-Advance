@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P1
+{
+    class Program
+    {
+        static void Main()
+        {
+            var capacity = int.Parse(Console.ReadLine());
+
+            var bunkers = new Dictionary<char, List<long>>();
+            var bunkOrder = new List<char>();
+
+            var input = Console.ReadLine();
+            while (input != "Bunker Revision")
+            {
+                var info = input.Split();
+
+                foreach (var t in info)
+                {
+                    int weapon;
+                    if (int.TryParse(t, out weapon))
+                    {
+                        if (bunkOrder.Count == 0) continue; // no bunkers
+
+                        while (bunkOrder.Count >= 1)
+                        {
+                            var j = 0;
+                            if (capacity - bunkers[bunkOrder[j]].Sum() >= weapon) // add weapon
+                            {
+                                bunkers[bunkOrder[j]].Add(weapon);
+                                break;
+                            }
+                            if (capacity - bunkers[bunkOrder[j]].Sum() < weapon && bunkOrder.Count == 1) // force push
+                            {
+                                if (capacity >= weapon)
+                                {
+                                    while (capacity - bunkers[bunkOrder[j]].Sum() < weapon)
+                                    {
+                                        bunkers[bunkOrder[j]].RemoveAt(0);
+                                    }
+                                    bunkers[bunkOrder[j]].Add(weapon);
+                                }
+                                break;
+                            }
+                            if (capacity - bunkers[bunkOrder[j]].Sum() >= weapon || bunkOrder.Count <= 1) continue;
+                            // overflow remove
+                            Console.WriteLine(bunkers[bunkOrder[j]].Count == 0
+                                ? $"{bunkOrder[j]} -> Empty"
+                                : $"{bunkOrder[j]} -> {string.Join(", ", bunkers[bunkOrder[j]])}");
+                            bunkers.Remove(bunkOrder[j]);
+                            bunkOrder.RemoveAt(j);
+                        }
+                    }
+                    else
+                    {
+                        if (!char.IsLetter(t[0]) || bunkers.ContainsKey(t[0])) continue;
+                        bunkOrder.Add(t[0]);
+                        bunkers.Add(t[0], new List<long>());
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+        }
+    }
+}

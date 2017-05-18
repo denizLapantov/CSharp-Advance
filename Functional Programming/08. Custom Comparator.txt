@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _8.CustomComparator
+{
+    public class CustomComparator
+    {
+        public static void Main()
+        {
+            int[] numbers = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+
+            Array.Sort(numbers);
+
+            Predicate<int> numberrs = n => n % 2 == 0;
+
+            foreach (var number in numbers)
+            {
+                if (numberrs(number))
+                {
+                    Console.Write(number + " ");
+                }
+             
+              
+            }
+            foreach (var number in numbers)
+            {
+                if (!numberrs(number))
+                {
+                    Console.Write(number + " ");
+                }
+            }
+        }
+    }
+}

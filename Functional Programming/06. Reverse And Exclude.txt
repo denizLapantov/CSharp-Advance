@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _6.ReverseAndExclude
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            int n = int.Parse(Console.ReadLine());
+
+            Array.Reverse(numbers);
+
+            Predicate<int> remove = x => x % n == 0;
+
+            foreach (var number in numbers)
+            {
+                if (!remove(number))
+                {
+                    Console.Write(number + " ");
+                } 
+            }
+        }
+    }
+}

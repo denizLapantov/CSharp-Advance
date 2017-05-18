@@ -1,0 +1,145 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _11.PartyReservationFilterModule
+{
+    public class PartyReservationFilterModule
+    {
+        public static void Main()
+        {
+            var namesAStrings =
+               Console.ReadLine().Split(new[] {' ',';'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> mylist = new List<string>();
+            var input = Console.ReadLine();
+
+            while (input != "Print")
+            {
+                ExecuteCommand(input.Split(' ',';'), namesAStrings, mylist);
+                input = Console.ReadLine();
+            }
+
+            
+            if (!namesAStrings.Any())
+            {
+                Console.WriteLine("Nobody is going to the party!");
+            }
+            else
+            {
+                Console.Write($"{string.Join(" ", namesAStrings)}");
+            }
+
+            Console.WriteLine();
+
+
+
+           
+        }
+
+        private static void ExecuteCommand(string[] commandArgs, List<string> collection,List<string> myList )
+        {
+            var operation = commandArgs[0];
+
+            switch (operation)
+            {
+                case "Add":
+                    AddCommand(commandArgs, collection , myList);
+                    break;
+                case "Remove":
+                    RemoveCommand(commandArgs, collection,myList);
+                    break;
+             
+            }
+
+
+        }
+
+     
+
+        private static void RemoveCommand(string[] commandArgs, List<string> collection, List<string> myList)
+        {
+            if (commandArgs[2] == "Starts")
+            {
+
+                var result = myList.Where(x => x.StartsWith(commandArgs[4])).ToList();
+                foreach (var i in result)
+                {
+                    collection.Add(i);
+                }
+             
+            }
+            if (commandArgs[2] == "Ends")
+            {
+
+                var result = myList.Where(x => x.StartsWith(commandArgs[4])).ToList();
+                foreach (var i in result)
+                {
+                    collection.Add(i);
+                }
+              
+            }
+            if (commandArgs[1] == "Length")
+            {
+                var result = myList.Where(x => x.Length <= int.Parse(commandArgs[2])).ToList();
+                foreach (var i in result)
+                {
+                    collection.Add(i);
+                }
+               
+            }
+            if (commandArgs[2] == "Contains")
+            {
+                var result = collection.Where(x => x.Contains(commandArgs[3])).ToList();
+                foreach (var i in result)
+                {
+                    collection.Add(i);
+                }
+               
+            }
+        }
+
+        private static void AddCommand(string[] commandArgs, List<string> collection, List<string> myList )
+        {
+            if (commandArgs[2] == "Starts")
+            {
+               
+              var result =  collection.Where(x => x.StartsWith(commandArgs[4])).ToList();
+                foreach (var i in result)
+                {
+                    myList.Add(i);
+                }
+                collection.RemoveAll(x => x.StartsWith(commandArgs[4]));
+            }
+            if (commandArgs[2] == "Ends")
+            {
+                var result = collection.Where(x => x.EndsWith(commandArgs[4])).ToList();
+                foreach (var i in result)
+                {
+                    myList.Add(i);
+                }
+                collection.RemoveAll(x => x.EndsWith(commandArgs[4]));
+            }
+            if (commandArgs[1] == "Length")
+            {
+                var result = collection.Where(x => x.Length <= int.Parse(commandArgs[2])).ToList();
+                foreach (var i in result)
+                {
+                    myList.Add(i);
+                }
+                collection.RemoveAll(x => x.Length <= int.Parse(commandArgs[2]));
+            }
+            if (commandArgs[2] == "Contains")
+            {
+                var result = collection.Where(x => x.Contains(commandArgs[3])).ToList();
+                foreach (var i in result)
+                {
+                    myList.Add(i);
+                }
+                collection.RemoveAll(x => x.Contains(commandArgs[3]));
+            }
+        }
+    }
+    
+}

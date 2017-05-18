@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace JedyCodeX
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            StringBuilder list = new StringBuilder();
+            var  name = new List<string>();
+            var message = new List<string>();
+            string output = "";
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+                list.Append(input);
+            }
+            string namePatern = Console.ReadLine();
+            string messagePattern = Console.ReadLine();
+
+            int[] numbers = Console.ReadLine().Split(new []{' '},StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+
+            int lenghtNamepattern = namePatern.Length;
+            int lenghtMessagePattern = messagePattern.Length;
+
+            Regex firstPat = new Regex(namePatern + @"([A-Za-z]*(?![a-zA-Z]))");
+            Regex secondPat = new Regex(messagePattern + @"([A-Za-z0-9]*(?![a-zA-Z0-9]))");
+
+            MatchCollection firstCollection = firstPat.Matches(list.ToString());
+
+            foreach (Match nameMatch in firstCollection)
+            {
+                string firstMach = nameMatch.Groups[1].Value;
+                int fisrtLenght = nameMatch.Groups[1].Value.Length;
+
+                if (fisrtLenght ==lenghtNamepattern )
+                {
+                    name.Add(firstMach);
+                }
+
+            }
+            MatchCollection secondMatchCollection = secondPat.Matches(list.ToString());
+
+            foreach (Match messagematch in secondMatchCollection)
+            {
+
+                string secondMach = messagematch.Groups[1].Value;
+                int secondLenght = messagematch.Groups[1].Value.Length;
+
+                if (secondLenght == lenghtMessagePattern)
+                {
+                    output += secondMach + " ";
+                }
+            }
+            string[] total = output.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (i <= total.Length)
+                {
+                    int index = numbers[i];
+                    message.Add(total[index - 1]);
+                }
+            }
+            for (int i = 0; i < name.Count; i++)
+            {
+                if (i < message.Count)
+                {
+                    Console.WriteLine(name[i] + " - " + message[i]);
+
+                }
+            }
+
+
+        }
+    }
+}

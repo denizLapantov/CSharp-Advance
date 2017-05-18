@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+
+            StringBuilder sb = new StringBuilder();
+
+
+            while (input!="burp")
+            {
+                sb.Append(input);
+                input = Console.ReadLine();
+            }
+
+            string text = Regex.Replace(sb.ToString(), @"\s+", " ");
+
+            Regex pattern = new Regex(@"([$%&'])([^$%&']+)\1");
+
+            MatchCollection matches = pattern.Matches(text);
+
+            StringBuilder result = new StringBuilder();
+            int weight = 0;
+            foreach (Match word in matches)
+            {
+                switch (word.Groups[1].Value)
+                {
+                    case "$":
+                        weight = 1;
+                        break;
+                    case "%":
+                        weight = 2;
+                        break;
+                    case "&":
+                        weight = 3;
+                        break;
+                    case "'":
+                        weight = 4;
+                        break;
+                }
+
+                char[] letter = word.Groups[2].Value.ToCharArray();
+
+                for (int i = 0; i < letter.Length; i++)
+                {
+                    char currrentletter;
+                    if (i%2 == 0)
+                    {
+                        currrentletter = (char) (letter[i] + weight);
+                        result.Append(currrentletter);
+                    }
+                    else
+                    {
+                        currrentletter = (char)(letter[i] - weight);
+                        result.Append(currrentletter);
+                    }
+                }
+
+                result.Append(" ");
+
+            }
+            Console.WriteLine(result);
+
+
+        }
+
+    }
+}

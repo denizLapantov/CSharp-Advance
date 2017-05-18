@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArraySlider
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BigInteger[] numbers =
+                Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).Select(BigInteger.Parse).ToArray();
+            string input = Console.ReadLine();
+            int curentIdex = 0;
+            while (input != "stop")
+            {
+                var comandArg = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToArray();
+                int offset = int.Parse(comandArg[0]) % numbers.Length;
+                string operation = comandArg[1];
+                int operand = int.Parse(comandArg[2]);
+
+                if (offset < 0)
+                {
+                    curentIdex =(curentIdex + offset + numbers.Length)  % numbers.Length;
+                }
+                else
+                {
+                    curentIdex = (curentIdex + offset) % numbers.Length;
+                }
+
+                ExecuteCommand(curentIdex, numbers, operation,operand);
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine($"[{string.Join(", ", numbers)}]");
+
+        }
+
+        private static void ExecuteCommand(int curentIdex, BigInteger[] numbers, string operation, int operand)
+        {
+            switch (operation)
+            {
+                case "/":
+                    numbers[curentIdex] /= operand;
+                    break;
+                case "*":
+                    numbers[curentIdex] *= operand;
+                    break;
+                case "+":
+                    numbers[curentIdex] += operand;
+                    break;
+                case "^":
+                    numbers[curentIdex] ^= operand;
+                    break;
+                case "|":
+                    numbers[curentIdex] |= operand;
+                    break;
+                case "&":
+                    numbers[curentIdex] &= operand;
+                    break;
+                case "-":
+                    numbers[curentIdex] -= operand;
+                    break;
+
+            }
+            if (numbers[curentIdex] < 0)
+            {
+                numbers[curentIdex] = 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _1.ChampionseLeague
+{
+    public class ChampionseLeague
+    {
+       public static readonly  Dictionary<string, int> winStatistic = new Dictionary<string, int>();
+       public static readonly  Dictionary<string, SortedSet<string>> oponentsStatistic = new Dictionary<string, SortedSet<string>>();
+
+        public static void Main()
+        {
+           
+
+            string input = Console.ReadLine();
+            while (input !="stop")
+            {
+                string[] comandArgs = input.Split('|').Select(x => x.Trim()).ToArray();
+                string firstTeam = comandArgs[0];
+                string secondTeam = comandArgs[1];
+                string winningTeam = FindWinner(firstTeam, secondTeam, comandArgs[2], comandArgs[3]);
+                AddTeamToWin(firstTeam, firstTeam == winningTeam);
+                AddTeamToWin(secondTeam, secondTeam == winningTeam);
+                Addopponent(firstTeam, secondTeam);
+                Addopponent(secondTeam, firstTeam);
+
+                input = Console.ReadLine();
+            }
+
+            var sort = winStatistic.OrderByDescending(x => x.Value).ThenBy(x => x.Key);
+
+            foreach (var team  in sort)
+            {
+                Console.WriteLine(team.Key);
+                Console.WriteLine($"- Wins: {team.Value}");
+                Console.WriteLine($"- Opponents: {string.Join(", ", oponentsStatistic[team.Key])}");
+            }
+        }
+
+        private static void Addopponent(string team, string oponent)
+        {
+            if (!oponentsStatistic.ContainsKey(team))
+            {
+                oponentsStatistic.Add(team, new SortedSet<string>());
+            }
+            oponentsStatistic[team].Add(oponent);
+        }
+
+        public static void AddTeamToWin(string team, bool isWinner )
+        {
+            if (!winStatistic.ContainsKey(team))
+            {
+                winStatistic.Add(team,0);
+            }
+            if (isWinner)
+            {
+                winStatistic[team]++;
+            }
+        }
+
+        private static string FindWinner(string firstTeam, string secondTeam, string firstScore, string secondScore)
+        {
+            int[] firstMachsResult = firstScore.Split(':').Select(int.Parse).ToArray();
+            int[] secondMachResult = secondScore.Split(':').Select(int.Parse).ToArray();
+
+            int firstTeamAGoals = firstMachsResult[0] + secondMachResult[1];
+            int secondTeamGoals = firstMachsResult[1] + secondMachResult[0];
+
+            if (firstTeamAGoals == secondTeamGoals)
+            {
+                return firstMachsResult[1] < secondMachResult[1] ? firstTeam : secondTeam;
+            }
+
+            return firstTeamAGoals > secondTeamGoals ? firstTeam : secondTeam;
+        }
+    }
+}

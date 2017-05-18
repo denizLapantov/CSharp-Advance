@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace JediDreams
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string,List<string>> data = new Dictionary<string, List<string>>();
+            Regex pattern = new Regex(@"([a-zA-Z]*[A-Z]+[a-zA-Z]*)\s*\(");
+            int n = int.Parse(Console.ReadLine());
+            string method = "";
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+
+                if (input.Contains(" static"))
+                {
+                    Match match = pattern.Match(input);
+
+                    if (match.Success)
+                    {
+                         method = match.Groups[1].Value.Trim();
+
+                        data.Add(method, new List<string>());
+                    }
+                }
+                else
+                {
+                    MatchCollection matchCollection = pattern.Matches(input);
+
+                    foreach (Match maches in matchCollection)
+                    {
+                        string machWord = maches.Groups[1].Value.Trim();
+
+                        data[method].Add(machWord);
+                    }
+                }
+            }
+
+            var sort = data.OrderByDescending(x => x.Value.Count).ThenBy(x => x.Key);
+
+            foreach (var keyValuePair in sort)
+            {
+              
+
+                if (keyValuePair.Value.Count > 0)
+                {
+                    Console.Write("{0} -> {1} -> ", keyValuePair.Key, keyValuePair.Value.Count);
+                    keyValuePair.Value.Sort();
+                    Console.WriteLine(string.Join(", ",keyValuePair.Value));
+                }
+                else
+                {
+                    Console.WriteLine("{0} -> None",keyValuePair.Key);
+                }
+            }
+        }
+    }
+}

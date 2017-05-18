@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _10.PredicateParty_
+{
+    public class PredicateParty
+    {
+        public static void Main()
+        {
+            var namesAStrings =
+                Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            var input = Console.ReadLine();
+
+            while (input != "Party!")
+            {
+                ExecuteCommand(input.Split(), namesAStrings);
+                input = Console.ReadLine();
+            }
+            
+
+            if (!namesAStrings.Any())
+            {
+                Console.WriteLine("Nobody is going to the party!");
+            }
+            else
+            {
+                Console.Write($"{string.Join(", ", namesAStrings)} are going to the party!");
+            }
+
+            Console.WriteLine();
+
+        }
+
+        private static void ExecuteCommand(string[] commandArgs, List<string> collection)
+        {
+            var operation = commandArgs[0];
+
+            switch (operation)
+            {
+                case "Double":
+                    DoubleCommand(commandArgs, collection);
+                    break;
+                case "Remove":
+                    RemoveCommand(commandArgs, collection);
+                    break;
+            }
+        }
+
+        private static void RemoveCommand(string[] commandArgs, List<string> collection)
+        {
+            if (commandArgs[1] == "StartsWith")
+            {
+                collection.RemoveAll(x => x.StartsWith(commandArgs[2]));
+            }
+             if (commandArgs[1] == "EndsWith")
+            {
+                collection.RemoveAll(x => x.EndsWith(commandArgs[2]));
+            }
+             if (commandArgs[1] == "Length")
+            {
+                collection.RemoveAll(x => x.Length <= int.Parse(commandArgs[2]));
+            }
+         }
+
+        private static void DoubleCommand(string[] commandArgs, List<string> collection)
+        {
+            if (commandArgs[1] == "StartsWith")
+            {
+                var result = collection.Where(n => n.Contains(commandArgs[2])).ToList();
+                foreach (var name in result)
+                {
+                    collection.Add(name);
+                }
+            }
+            if (commandArgs[1] == "EndsWith")
+            {
+                var result = collection.Where(n => n.Contains(commandArgs[2])).ToList();
+                collection.AddRange(result);
+            }
+            if (commandArgs[1] != "Length") return;
+            {
+                var result = collection.Where(x => x.Length <= int.Parse(commandArgs[2])).ToList();
+                collection.AddRange(result);
+            }
+        }
+    }
+}

@@ -1,0 +1,85 @@
+using System;
+using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
+
+public class ArraySlider
+{
+    public static void Main()
+    {
+       
+        int[] dimension = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+        int rows = dimension[0];
+        int cols = dimension[1];
+
+        int[,] fields = new int[rows,cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            int[] values = Console.ReadLine().Trim().Split().Select(int.Parse).ToArray();
+
+            for (int j = 0; j < cols; j++)
+            {
+                fields[i, j] = values[j];
+            }
+        }
+
+        string command = Console.ReadLine();
+
+        while (command != "cease fire!")
+        {
+            var commandsArgs = command.Split();
+
+            int row = int.Parse(commandsArgs[0]);
+            int col = int.Parse(commandsArgs[1]);
+            int damage = char.Parse(commandsArgs[2]);
+
+
+
+            DoTheMagic(fields, damage, row, col);
+
+            command = Console.ReadLine();
+        }
+
+        int counter = 0;
+        for (int i = 0; i < fields.GetLength(0); i++)
+        {
+            for (int j = 0; j < fields.GetLength(1); j++)
+            {
+                if (fields[i,j] <=0)
+                {
+                    counter++;
+                }
+            }
+        }
+        Console.WriteLine("Destroyed bunkers: {0}", counter);
+        Console.WriteLine("Damage done: {0:f1} %", counter/ (double)(rows * cols) * 100);
+
+    }
+
+    private static void DoTheMagic(int[,] matrix, int damage, int row, int col)
+    {
+        int halfDamage = (int)Math.Ceiling(damage / 2.0);
+        int startRow = Math.Max(0, row - 1);
+        int endRow = Math.Min(matrix.GetLength(0) - 1 , row + 1);
+        int startCol = Math.Max(0, col - 1);
+        int endCoL = Math.Min(matrix.GetLength(1) - 1 , col + 1);
+
+        for (int i = startRow; i <= endRow; i++)
+        {
+            for (int j = startCol; j <= endCoL; j++)
+            {
+                if (i == row && j ==col)
+                {
+                    matrix[i, j] -= damage;
+                }
+                else
+                {
+                    matrix[i, j] -= halfDamage;
+                }
+            }
+        }
+    }
+}
+

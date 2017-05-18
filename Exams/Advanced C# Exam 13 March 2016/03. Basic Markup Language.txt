@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace _3.BasicMarkUpLanguage
+{
+    public class BasicMarkUpLanguage
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+            List<string> list = new List<string>();
+            while (input != "<stop/>")
+            {
+                Regex pattern = new Regex(@"\s*<\s*([a-zA-z]*).+=\s*""(.+)""");
+                Match commandArg = pattern.Match(input);
+                ExecuteCommand(commandArg,list,input);
+                input = Console.ReadLine();
+            }
+            int count = 1;
+            foreach (var name in list)
+            {
+                Console.WriteLine("{0}. {1}",count,name);
+                count++;
+            }
+
+            
+
+        }
+
+        private static void ExecuteCommand(Match commandArgs,List<string> list, string input )
+        {
+            string command = commandArgs.Groups[1].Value;
+
+            switch (command)
+            {
+                case "inverse":
+                    InverseCommand(commandArgs, list);
+                    break;
+                case "reverse":
+                    ReverseCommand(commandArgs, list);
+                    break;
+                case "repeat":
+                    RepeatCommand(commandArgs, list,input);
+                    break;
+            }
+        }
+
+        private static void RepeatCommand(Match command, List<string> list,string input)
+        {
+            string tempPattern = @"value\s*=\s*""\s*([0-9]+)";
+            Regex tempRegex = new Regex(tempPattern);
+            Match match = tempRegex.Match(input);
+            int numberToRepeat = int.Parse(match.Groups[1].Value);
+            string wordToRepeat = command.Groups[2].Value;
+
+            for (int i = 0; i < numberToRepeat; i++)
+            {
+                list.Add(wordToRepeat);
+            }
+
+        }
+
+        private static void ReverseCommand(Match commandargs, List<string> list)
+        {
+            string wordToReverse = commandargs.Groups[2].Value;
+
+            char[] cArray = wordToReverse.ToCharArray();
+            string reverse = String.Empty;
+            for (int i = cArray.Length - 1; i > -1; i--)
+            {
+                reverse += cArray[i];
+            }
+           list.Add(reverse);
+        }
+
+        private static void InverseCommand(Match commandArgs,List<string> list)
+        {
+            string wordToInverse = commandArgs.Groups[2].Value;
+
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < wordToInverse.Length; i++)
+            {
+                if (char.IsUpper(wordToInverse, i))
+                    result.Append(char.ToLower(wordToInverse[i]));
+                else if (char.IsLower(wordToInverse, i))
+                    result.Append(char.ToUpper(wordToInverse[i]));
+                else
+                    result.Append(wordToInverse[i]);
+            }
+
+          list.Add(result.ToString());
+        }
+    }
+}

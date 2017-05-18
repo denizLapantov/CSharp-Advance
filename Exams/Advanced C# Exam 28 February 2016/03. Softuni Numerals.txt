@@ -1,0 +1,59 @@
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace SoftUniNumerals
+{
+    public class SoftUniNumerals
+    {
+        public static void Main()
+        {
+            Regex pattern = new Regex(@"(aa|aba|bcc|cc|cdc)");
+            string input = Console.ReadLine();
+            MatchCollection match = pattern.Matches(input);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Match i in match)
+            {
+                if (i.Value == "aa")
+                {
+                    sb.Append(0);
+                    continue;
+                }
+                if (i.Value == "aba")
+                {
+                    sb.Append(1);
+                    continue;
+                }
+                if (i.Value == "bcc")
+                {
+                    sb.Append(2);
+                    continue;
+                }
+                if (i.Value == "cc")
+                {
+                    sb.Append(3);
+                    continue;
+                }
+                if (i.Value == "cdc")
+                {
+                    sb.Append(4);
+                    continue;
+                }
+            }
+            BigInteger c = BigInteger.Parse(sb.ToString());
+            string characters = "0123456789ABCDEF";
+            BigInteger bases = 5;
+            BigInteger results = 0;
+            foreach (char digit in c.ToString().ToArray())
+            {
+                results = (bases * results) + characters.ToUpper().IndexOf(digit);
+            }
+
+            Console.WriteLine(results);
+        }
+    }
+}

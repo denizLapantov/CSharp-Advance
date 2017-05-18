@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Population
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string,Dictionary<string, long>> dictionary = new Dictionary<string, Dictionary<string, long>>();
+
+            string input = Console.ReadLine();
+
+            while (input != "report")
+            {
+                string[] comandArg = input.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+                string city = comandArg[0];
+                string country = comandArg[1];
+                long population = long.Parse(comandArg[2]);
+
+                if (!dictionary.ContainsKey(country))
+                {
+                    dictionary[country] = new Dictionary<string, long>();
+                }
+                if (!dictionary.ContainsKey(city))
+                {
+                    dictionary[country].Add(city,population);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            var sort = dictionary.OrderByDescending(x => x.Value.Values.Sum());
+
+            foreach (var ounerList in sort)
+            {
+                var sorted = ounerList.Value.OrderByDescending(x => x.Value);
+
+                Console.WriteLine("{0} (total population: {1})", ounerList.Key, ounerList.Value.Values.Sum());
+                foreach (var p in sorted)
+                {
+                    Console.WriteLine("=>{0}: {1}", p.Key, p.Value);
+                }
+            }
+         
+
+
+        }
+    }
+}

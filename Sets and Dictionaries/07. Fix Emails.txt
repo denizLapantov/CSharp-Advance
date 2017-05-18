@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FixEmail
+{
+    public class Program
+    {
+        static void Main()
+        {
+            Dictionary<string,string> dictionary = new Dictionary<string, string>();
+
+            string input = Console.ReadLine();
+
+            while (input !="stop")
+            {
+                string emails = Console.ReadLine();
+
+                string ending = emails.Substring(emails.Length - 2, 2).ToLower();
+
+                if (ending != "us" && ending !="uk")
+                {
+                    dictionary.Add(input, emails);
+                }
+
+                input = Console.ReadLine();
+
+              
+            }
+
+            foreach (var el in dictionary)
+            {
+                Console.WriteLine("{0} -> {1}", el.Key, el.Value);
+            }
+        }
+    }
+}

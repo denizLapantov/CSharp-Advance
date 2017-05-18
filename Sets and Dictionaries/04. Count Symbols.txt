@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StacksAndQueuesExercises
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string text = Console.ReadLine();
+
+            SortedDictionary<char,int> dictionary = new SortedDictionary<char, int>();
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                char currentSymbol = text[i];
+
+                if (!dictionary.ContainsKey(currentSymbol))
+                {
+                    dictionary[currentSymbol] = 0;
+                }
+
+                dictionary[currentSymbol]++;
+            }
+
+            foreach (var VARIABLE in dictionary)
+            {
+                Console.WriteLine("{0}: {1} time/s",VARIABLE.Key, VARIABLE.Value);
+            }
+        }
+    }
+}

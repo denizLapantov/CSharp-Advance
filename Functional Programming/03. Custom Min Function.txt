@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _3.CustomMinFunction
+{
+    public class CustomMinFunction
+    {
+        public static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            Func<int[], int> myFunc = number => number.Min();
+
+            Console.WriteLine(myFunc(numbers));
+        }   
+
+        public int ReturnMinNumber(int[] number)
+        {
+            return number.Min();
+        }
+    }
+}

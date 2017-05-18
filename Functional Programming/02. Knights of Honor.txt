@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _2.KnightsOfHonor
+{
+    public class KnightOfHonor
+    {
+       public static void Main()
+       {
+           string[] input = Console.ReadLine().Split(new[] {'\t',' '}, StringSplitOptions.RemoveEmptyEntries);
+           Action<string> print = str => Console.WriteLine(str);
+
+           foreach (var s in input)
+           {
+               print("Sir " + s);
+           }
+
+
+       }
+        public void Print(string message,string str)
+        {
+            Console.WriteLine(str);
+        }
+    }
+}

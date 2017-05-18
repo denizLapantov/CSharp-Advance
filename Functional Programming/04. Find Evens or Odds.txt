@@ -1,0 +1,39 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _4.FindEvensOrOdds
+{
+    public class FindEvensOrOdds
+    {
+        public static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            List<int> number = new List<int>();
+            string input = Console.ReadLine();
+
+            int FirstNumber = numbers[0];
+            int secondNumber = numbers[1];
+
+            Predicate<int> even = x => x%2 == 0;
+
+            for (int i = FirstNumber ; i <=secondNumber; i++)
+            {
+                if (input == "even" && even(i))
+                {
+                    Console.Write(i + " ");
+                }
+                else if (input == "odd" && !even(i))
+                {
+                    Console.Write(i + " ");
+                }
+            }
+            Console.WriteLine();
+        }
+        
+    }
+}

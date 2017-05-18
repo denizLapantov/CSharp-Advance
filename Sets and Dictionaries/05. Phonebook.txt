@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+
+
+namespace AMinnerTask
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string,string> dictionary = new Dictionary<string,string>();
+
+            string input = Console.ReadLine();
+
+            while (input != "search")
+            {
+                if (input != null)
+                {
+                    string[] contact =input.Split(new []{'-'},StringSplitOptions.RemoveEmptyEntries);
+                    string name = contact[0];
+                    string number = contact[1];
+
+                    if (!dictionary.ContainsKey(name))
+                    {
+                        dictionary[name] = String.Empty;
+                        
+                    }
+
+                    dictionary[name] = number;
+                }
+                input = Console.ReadLine();
+            }
+            string contactNameToSearch = Console.ReadLine();
+
+            while (contactNameToSearch != "stop")
+            {
+                if (contactNameToSearch != null && dictionary.ContainsKey(contactNameToSearch))
+                {
+                    Console.WriteLine("{0} -> {1}", contactNameToSearch, string.Join("", dictionary[contactNameToSearch]));
+                }
+                else
+                {
+                    Console.WriteLine("Contact {0} does not exist.", contactNameToSearch);
+                }
+
+                contactNameToSearch = Console.ReadLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _3.MaximumElement
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var myStack = new Stack<int>();
+            var MaxNumbers = new Stack<int>();
+            int maxelement = Int32.MinValue;
+            
+
+            var n = int.Parse(Console.ReadLine());
+
+            for (var i = 0; i < n; i++)
+            {
+                var commandArg = Console.ReadLine().Split();
+                var comand = commandArg[0];
+                    
+                if (comand == "1")
+                {
+                    var numberToPush = int.Parse(commandArg[1]);
+                    myStack.Push(numberToPush);
+                    if (numberToPush > maxelement)
+                    {
+                        maxelement = numberToPush;
+                        MaxNumbers.Push(maxelement);
+                    }
+                }
+                else if (comand == "2")
+                {
+                    int elementAtPop = myStack.Pop();
+                    if (elementAtPop == maxelement)
+                    {
+                        MaxNumbers.Pop();
+                        if (MaxNumbers.Count > 0)
+                        {
+                            maxelement = MaxNumbers.Peek();
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(MaxNumbers.Peek());
+                }
+            
+            }
+        }
+    }
+}

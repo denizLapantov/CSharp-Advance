@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace Srabsko
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dictionary = new Dictionary<string, Dictionary<string, int>>();
+            var input = Console.ReadLine();
+
+            var regex = new Regex(@"([ A-Za-z]+) @(\D+) (\d+) (\d+)");
+
+            while (input !="End")
+            {
+                var match = regex.Match(input);
+
+                if (match.Success)
+                {
+                    var singer = match.Groups[1].Value.Trim();
+                    var city = match.Groups[2].Value.Trim();
+                    var ticketPrice =int.Parse(match.Groups[3].Value.Trim());
+                    var ticketCount = int.Parse(match.Groups[4].Value.Trim());
+                    var totalMoney = ticketPrice * ticketCount;
+
+                    if (!dictionary.ContainsKey(city))
+                    {
+                        dictionary[city] = new Dictionary<string, int>();
+                    }
+                    if (!dictionary[city].ContainsKey(singer))
+                    {
+                        dictionary[city][singer] = 0;
+                    }
+
+                    dictionary[city][singer] = dictionary[city][singer] + totalMoney;
+                    
+                }
+
+                input = Console.ReadLine();
+            }
+
+            foreach (var ownerDict in dictionary)
+            {
+                Console.WriteLine(ownerDict.Key);
+
+                foreach (var innerDict in ownerDict.Value.OrderByDescending(x => x.Value))
+                {
+                    Console.WriteLine("#  {0} -> {1}",innerDict.Key, innerDict.Value);
+                }
+            }
+        }
+    }
+}
